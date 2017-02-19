@@ -2,9 +2,11 @@ package minesweeper.main;
 
 public class MineSweeper {
 
-	public static void main(String[] args)
+	
+    public static void main(String[] args)
 	{
-		// To-do stub
+            MainLogic player = new MainLogic();
+            player.play();
 	}
 
 }
