@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Boards;
+package minesweeper.boards;
 
-import Database.DatabaseInterface;
+import minesweeper.database.DatabaseInterface;
 
 /**
  * normal output using ASCII
