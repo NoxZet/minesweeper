@@ -9,11 +9,11 @@ package minesweeper.database;
  * just a normal game
  * @author Honza
  */
-public class NormalGame implements IDatabase
+public class DatabaseStandard implements IDatabase
 {
     
     
-    public NormalGame()
+    public DatabaseStandard()
     {
         
         

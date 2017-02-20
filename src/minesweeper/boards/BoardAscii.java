@@ -11,7 +11,7 @@ import minesweeper.database.IDatabase;
  * normal output using ASCII
  * @author Honza
  */
-public class AsciiSeen implements SeenBoard
+public class BoardAscii implements IBoard
 {
     IDatabase papa;
     private final char flagCh;
@@ -20,7 +20,7 @@ public class AsciiSeen implements SeenBoard
     private final char boomCh;
     private final char freeSeenCh;
     
-    public AsciiSeen(IDatabase bToPlay) 
+    public BoardAscii(IDatabase bToPlay) 
     {
         papa = bToPlay;
         flagCh = 'I';

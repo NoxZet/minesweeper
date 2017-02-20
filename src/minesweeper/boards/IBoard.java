@@ -9,7 +9,7 @@ package minesweeper.boards;
  * any output, has access to database
  * @author Honza
  */
-public interface SeenBoard 
+public interface IBoard 
 {
     /**
     * show to player his progress

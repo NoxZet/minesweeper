@@ -5,6 +5,13 @@
  */
 package minesweeper.main;
 
+import minesweeper.boards.BoardAscii;
+import minesweeper.boards.IBoard;
+import minesweeper.database.DatabaseStandard;
+import minesweeper.database.IDatabase;
+import minesweeper.players.HumanAscii;
+import minesweeper.players.IPlayer;
+
 /**
  *
  * @author Honza
@@ -14,12 +21,9 @@ public class MainLogic
     
     boolean play()
     {
-        minesweeper.database.IDatabase bToPlay = new minesweeper.database.NormalGame();
-        minesweeper.boards.SeenBoard bToSee = new minesweeper.boards.AsciiSeen(bToPlay);
-        minesweeper.players.IPlayer player = new minesweeper.players.HumanAscii();
-        
-        
-        
+        IDatabase database = new DatabaseStandard();
+        IBoard board = new BoardAscii(database);
+        IPlayer player = new HumanAscii();
         
         return false;
     }

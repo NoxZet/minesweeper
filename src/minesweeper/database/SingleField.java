@@ -11,19 +11,31 @@ package minesweeper.database;
  */
 class SingleField 
 {
-    boolean[] neighbours;
+    boolean[] neighbors;
     
     /**
      * @param type true for mine, false for empty space
      * @param neighbours eight booleans for neighbors (begins at right, ends at right down)
      */
-    SingleField(boolean type, boolean[] neighbours)
+    SingleField(boolean type, boolean[] neighbors)
     {
-        this.neighbours = neighbours;
+        this.neighbors = neighbors;
     }
-    
+
     /**
-     * 
+     * @return has valid field on right
      */
+    public boolean hasField(int field)
+    {
+    	return neighbors[field];
+    }
+
+    /**
+     * @return has valid field on right
+     */
+    public boolean hasFieldRight()
+    {
+    	return hasField(0);
+    }
     
 }
