@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package minesweeper.database;
+package minesweeper.players;
 
 /**
- * no matter what is it, you send here input
+ * any player interface
  * @author Honza
  */
-public interface DatabaseInterface 
+public interface IPlayer 
 {
     /**
-    * send info, where did player go
-     * @param where [x,y] where 
-    */
-    public void clicked(int[] where);
+     * @return last time played position
+     */
+    public int[] playTurn();
+    public void happened();
+    
+    
 }

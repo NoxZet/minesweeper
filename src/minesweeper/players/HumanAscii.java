@@ -11,11 +11,11 @@ import java.util.Scanner;
  * player playing on ascii table with Scanner IO
  * @author Honza
  */
-public class HumanH implements Player 
+public class HumanAscii implements IPlayer 
 {
     protected Scanner sc;
     
-    public HumanH ()
+    public HumanAscii ()
     {
         sc = new Scanner(System.in, "Windows-1250");
     }

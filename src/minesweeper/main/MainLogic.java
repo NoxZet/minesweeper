@@ -14,9 +14,9 @@ public class MainLogic
     
     boolean play()
     {
-        minesweeper.database.DatabaseInterface bToPlay = new minesweeper.database.NormalGame();
+        minesweeper.database.IDatabase bToPlay = new minesweeper.database.NormalGame();
         minesweeper.boards.SeenBoard bToSee = new minesweeper.boards.AsciiSeen(bToPlay);
-        minesweeper.players.Player player = new minesweeper.players.HumanH();
+        minesweeper.players.IPlayer player = new minesweeper.players.HumanAscii();
         
         
         

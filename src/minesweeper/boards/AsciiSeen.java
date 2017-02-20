@@ -5,7 +5,7 @@
  */
 package minesweeper.boards;
 
-import minesweeper.database.DatabaseInterface;
+import minesweeper.database.IDatabase;
 
 /**
  * normal output using ASCII
@@ -13,14 +13,14 @@ import minesweeper.database.DatabaseInterface;
  */
 public class AsciiSeen implements SeenBoard
 {
-    DatabaseInterface papa;
+    IDatabase papa;
     private final char flagCh;
     private final char spaceCh;
     private final char mineCh;
     private final char boomCh;
     private final char freeSeenCh;
     
-    public AsciiSeen(DatabaseInterface bToPlay) 
+    public AsciiSeen(IDatabase bToPlay) 
     {
         papa = bToPlay;
         flagCh = 'I';

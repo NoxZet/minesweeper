@@ -9,22 +9,21 @@ package minesweeper.database;
  * one piece of field
  * @author Honza
  */
-class OnePlace 
+class SingleField 
 {
     boolean[] neighbours;
     
     /**
-     * dssd
      * @param type true for mine, false for empty space
-     * @param neighbours eight booleans for neighbours (begins at right, ends at right down)
+     * @param neighbours eight booleans for neighbors (begins at right, ends at right down)
      */
-    OnePlace(boolean type, boolean[] neighbours)
+    SingleField(boolean type, boolean[] neighbours)
     {
         this.neighbours = neighbours;
-        
-        
     }
     
-    
+    /**
+     * 
+     */
     
 }
