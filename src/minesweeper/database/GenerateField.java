@@ -73,11 +73,13 @@ class GenerateField
     
     /**
      * This method returns field with free space on place where you clicked
+     * Has some mistake, if you are clever like Svoboda, you can find where is very probably one mine
+     * maybe, iam gonna fix it later by using Random
      * @param clicked is two space field {x, y}, pointing where must be free space
      * @return random table[y][x]
      */
     
-    boolean[][] getSpecifiedTable(int[] clicked)
+    boolean[][] getSpecifiedRandomTable(int[] clicked)
     {
         if (!generatedB[clicked[1]][clicked[0]])
         {
@@ -111,6 +113,19 @@ class GenerateField
         
         return moveArray(generatedB, pX, pY);
     }
+    
+    /**
+     * this method return field, with largest possible array on place, you clicked
+     * @param clicked {x, y} click position
+     * @return random field of flags and blank spaces
+     */
+    
+    public boolean[][] getRandomTableWithSpace(int[] clicked)
+    {
+        
+    }
+    
+    
     
     
     private boolean[][] moveArray (boolean[][] arrayToMove, int xMove, int yMove)
