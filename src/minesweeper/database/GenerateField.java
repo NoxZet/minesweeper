@@ -11,7 +11,7 @@ import java.util.Random;
  * generating fields
  * @author Honza
  */
-public class GenerateField 
+class GenerateField 
 {
     private int mX;
     private int mY;
@@ -26,7 +26,7 @@ public class GenerateField
         generatedB = generate();
     }
     
-    boolean[][] generate()
+    private boolean[][] generate()
     {
         Random random = new Random();
         boolean[] helpField = new boolean[mX * mY];
@@ -54,6 +54,71 @@ public class GenerateField
         return finalField;
     }
     
+    /**
+     * Returns unchanged random table, doesnt matter, where you clicked
+     * @return random table[y][x]; 
+    */
+    
+    boolean[][] getRandomTable()
+    {
+        return generatedB;
+    }
+    /**
+     * This method returns field with free space on place where you clicked
+     * @param clicked is two space field {x, y}, pointing where must be free space
+     * @return random table[y][x]
+     */
+    
+    boolean[][] getSpecifiedTable(int[] clicked)
+    {
+        if (!generatedB[clicked[0]][clicked[1]])
+        {
+            return generatedB;
+        }
+        int pX = 0;
+        int pY = 0;
+        boolean doMore = true;
+        
+        for (int y = 0; y < generatedB.length; y++)
+        {
+            for (int x = 0; x < generatedB[y].length; x++)
+            {
+                if (!generatedB[y][x])
+                {
+                    doMore = false;
+                    pX = x;
+                    pY = y;
+                    break;
+                }
+            }
+            if (!doMore)
+            {
+                break;
+            }
+        }
+        
+        pX = clicked[0] - pX;
+        pY = clicked[1] - pY;
+        
+        return moveArray(generatedB, pX, pY);
+    }
+    
+    
+    private boolean[][] moveArray (boolean[][] arrayToMove, int xMove, int yMove)
+    {
+        int limitY = arrayToMove.length;        
+        int limitX = arrayToMove[0].length;
+        boolean[][] movedArray = new boolean[limitY][limitX];
+        
+        for (int y = 0; y < limitY; y++)
+        {
+            for (int x = 0; x < limitX; x++)
+            {
+                movedArray[(x+xMove+limitX)%limitX][(y+yMove+limitY)%limitY] = arrayToMove[y][x];
+            }
+        }
+        return movedArray;
+    }
     
     
     
