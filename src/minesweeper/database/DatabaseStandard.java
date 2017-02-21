@@ -12,10 +12,8 @@ package minesweeper.database;
 public class DatabaseStandard implements IDatabase
 {
     
-    
     public DatabaseStandard()
     {
-        
         
     }
     
