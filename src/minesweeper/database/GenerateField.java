@@ -8,7 +8,7 @@ package minesweeper.database;
 import java.util.Random;
 
 /**
- * generating fields
+ * class of all generating fields
  * @author Honza
  */
 class GenerateField 
@@ -18,6 +18,13 @@ class GenerateField
     private int quant;
     private boolean[][] generatedB;
             
+    /**
+     * totally random generate field (width, height, mines)
+     * @param width defines width of field (x)
+     * @param height defines height of field (y)
+     * @param howMany defines number of mines
+     */
+    
     GenerateField(int width, int height, int howMany)
     {
         mX = width;
@@ -63,6 +70,7 @@ class GenerateField
     {
         return generatedB;
     }
+    
     /**
      * This method returns field with free space on place where you clicked
      * @param clicked is two space field {x, y}, pointing where must be free space
@@ -71,7 +79,7 @@ class GenerateField
     
     boolean[][] getSpecifiedTable(int[] clicked)
     {
-        if (!generatedB[clicked[0]][clicked[1]])
+        if (!generatedB[clicked[1]][clicked[0]])
         {
             return generatedB;
         }
@@ -100,6 +108,7 @@ class GenerateField
         pX = clicked[0] - pX;
         pY = clicked[1] - pY;
         
+        
         return moveArray(generatedB, pX, pY);
     }
     
@@ -114,7 +123,7 @@ class GenerateField
         {
             for (int x = 0; x < limitX; x++)
             {
-                movedArray[(x+xMove+limitX)%limitX][(y+yMove+limitY)%limitY] = arrayToMove[y][x];
+                movedArray[(y+yMove+limitY)%limitY][(x+xMove+limitX)%limitX] = arrayToMove[y][x];
             }
         }
         return movedArray;
