@@ -13,10 +13,10 @@ import java.util.Random;
  */
 class GenerateField 
 {
-    private int mX;
-    private int mY;
-    private int quant;
-    private boolean[][] generatedB;
+    private final int mX;
+    private final int mY;
+    private final int quant;
+    private final boolean[][] generatedB;
             
     /**
      * totally random generate field (width, height, mines)
@@ -122,11 +122,69 @@ class GenerateField
     
     public boolean[][] getRandomTableWithSpace(int[] clicked)
     {
+        int itsY = generatedB.length;
+        int itsX = generatedB[0].length; 
         
+        boolean[][] possi = new boolean[itsY][itsX];
+        for (int y = 0; y < itsY; y++)
+        {
+            for (int x = 0; x < itsX; x++)
+            {
+                if (generatedB[y][x])
+                {
+                    possi[y][x] = true;
+                    if (x-1 >= 0)
+                    {
+                        possi[y][x-1] = true;
+                        if (y-1 >= 0)
+                        {
+                            possi[y-1][x-1] = true;
+                        }
+                        if (y+1 < itsY)
+                        {
+                            possi[y+1][x-1] = true;
+                        }
+                    }
+                    if (x+1 < itsX)
+                    {
+                        possi[y][x+1] = true;
+                        if (y-1 >= 0)
+                        {
+                            possi[y-1][x+1] = true;
+                        }
+                        if (y+1 < itsY)
+                        {
+                            possi[y+1][x+1] = true;
+                        }
+                    }
+                    if (y-1 >= 0)
+                    {
+                        possi[y-1][x] = true;
+                    }
+                    if (y+1 < itsY)
+                    {
+                        possi[y+1][x] = true;
+                    }
+                }
+            }
+        }
+        
+        for (int y = 0; y < itsY; y++)
+        {
+            for (int x = 0; x < itsX; x++)
+            {
+                
+                
+                
+            }
+        }
+        
+        
+        return null;
     }
     
     
-    
+        
     
     private boolean[][] moveArray (boolean[][] arrayToMove, int xMove, int yMove)
     {
