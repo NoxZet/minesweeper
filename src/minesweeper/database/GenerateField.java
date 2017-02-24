@@ -17,7 +17,7 @@ class GenerateField
     private final int mY;
     private final int quant;
     private final boolean[][] generatedB;
-            
+    
     /**
      * totally random generate field (width, height, mines)
      * @param width defines width of field (x)
@@ -122,60 +122,57 @@ class GenerateField
     
     public boolean[][] getRandomTableWithSpace(int[] clicked)
     {
-        int itsY = generatedB.length;
-        int itsX = generatedB[0].length; 
-        
-        boolean[][] possi = new boolean[itsY][itsX];
-        for (int y = 0; y < itsY; y++)
+        boolean[][] possi = new boolean[mY][mX]; //0 are 0, others are 1
+        for (int y = 0; y < mY; y++)
         {
-            for (int x = 0; x < itsX; x++)
+            for (int x = 0; x < mX; x++)
             {
                 if (generatedB[y][x])
                 {
-                    possi[y][x] = true;
-                    if (x-1 >= 0)
-                    {
-                        possi[y][x-1] = true;
-                        if (y-1 >= 0)
-                        {
-                            possi[y-1][x-1] = true;
-                        }
-                        if (y+1 < itsY)
-                        {
-                            possi[y+1][x-1] = true;
-                        }
-                    }
-                    if (x+1 < itsX)
-                    {
-                        possi[y][x+1] = true;
-                        if (y-1 >= 0)
-                        {
-                            possi[y-1][x+1] = true;
-                        }
-                        if (y+1 < itsY)
-                        {
-                            possi[y+1][x+1] = true;
-                        }
-                    }
-                    if (y-1 >= 0)
-                    {
-                        possi[y-1][x] = true;
-                    }
-                    if (y+1 < itsY)
-                    {
-                        possi[y+1][x] = true;
-                    }
+                    possi[y][x] = true; //0 0
+                    possi[y][(x+1)%mX] = true; //1 0
+                    possi[(y-1+mY)%mY][(x+1)%mX] = true; // 1 -1
+                    possi[(y-1+mY)%mY][x] = true; //0 -1
+                    possi[(y-1+mY)%mY][(x-1+mX)%mX] = true; //-1 -1
+                    possi[y][(x-1+mX)%mX] = true; //-1 0
+                    possi[(y+1)%mY][(x-1+mX)%mX] = true; //-1 1
+                    possi[(y+1)%mY][x] = true; //0 1
+                    possi[(y+1)%mY][(x+1)%mX] = true; //1 1
                 }
             }
         }
         
-        for (int y = 0; y < itsY; y++)
+        
+        
+        int[][] flatPattern = new int[mY][mX]; //types of zero flat
+        int type = 1;
+        for (int y = 0; y < mY; y++)
         {
-            for (int x = 0; x < itsX; x++)
+            for (int x = 0; x < mX; x++)
             {
+                if (possi[y][x])
+                {
+                    continue;
+                }
+                flatPattern[y][x] = type;
                 
-                
-                
+                if (flatPattern[y][(x+1)%mX] != 0)
+                {mergeIt(flatPattern[y][(x+1)%mX], flatPattern, x, y);}
+                else if(flatPattern[(y-1+mY)%mY][(x+1)%mX] != 0)
+                {mergeIt(flatPattern[(y-1+mY)%mY][(x+1)%mX], flatPattern, x, y);}
+                else if(flatPattern[(y-1+mY)%mY][x] != 0)
+                {mergeIt(flatPattern[(y-1+mY)%mY][x], flatPattern, x, y);}
+                else if(flatPattern[(y-1+mY)%mY][(x-1+mX)%mX] != 0)
+                {mergeIt(flatPattern[(y-1+mY)%mY][(x-1+mX)%mX], flatPattern, x, y);}
+                else if(flatPattern[y][(x-1+mX)%mX] != 0)
+                {mergeIt(flatPattern[y][(x-1+mX)%mX], flatPattern, x, y);}
+                else if(flatPattern[(y+1)%mY][(x-1+mX)%mX] != 0)
+                {mergeIt(flatPattern[(y+1)%mY][(x-1+mX)%mX], flatPattern, x, y);}
+                else if(flatPattern[(y+1)%mY][x] != 0)
+                {mergeIt(flatPattern[(y+1)%mY][x], flatPattern, x, y);}
+                else if(flatPattern[(y+1)%mY][(x+1)%mX] != 0)
+                {mergeIt(flatPattern[(y+1)%mY][(x+1)%mX], flatPattern, x, y);}
+                type++;
             }
         }
         
@@ -201,8 +198,65 @@ class GenerateField
         }
         return movedArray;
     }
-    
-    
+
+    private void mergeIt(int known, int[][] flatPattern, int x, int y) 
+    {
+        flatPattern[y][x] = known;
+        
+        if (flatPattern[y][(x+1)%mX] != 0 && flatPattern[y][(x+1)%mX] != known)
+        {mergeIt(known, flatPattern, (x+1)%mX, y);}
+        
+        if(flatPattern[(y-1+mY)%mY][(x+1)%mX] != 0 && flatPattern[(y-1+mY)%mY][(x+1)%mX] != known)
+        {mergeIt(known, flatPattern, (x+1)%mX, (y-1+mY));}
+        
+        if(flatPattern[(y-1+mY)%mY][x] != 0 && flatPattern[(y-1+mY)%mY][x] != known)
+        {mergeIt(known, flatPattern, x, (y-1+mY));}
+        
+        if(flatPattern[(y-1+mY)%mY][(x-1+mX)%mX] != 0 && flatPattern[(y-1+mY)%mY][(x-1+mX)%mX] != known)
+        {mergeIt(known, flatPattern, (x-1+mX)%mX, (y-1+mY));}
+        
+        if(flatPattern[y][(x-1+mX)%mX] != 0 && flatPattern[y][(x-1+mX)%mX] != known)
+        {mergeIt(known, flatPattern, (x-1+mX)%mX, y);}
+        
+        if(flatPattern[(y+1)%mY][(x-1+mX)%mX] != 0 && flatPattern[(y+1)%mY][(x-1+mX)%mX] != known)
+        {mergeIt(known, flatPattern, (x-1+mX)%mX, (y+1)%mY);}
+        
+        if(flatPattern[(y+1)%mY][x] != 0 && flatPattern[(y+1)%mY][x] != known)
+        {mergeIt(known, flatPattern, x, (y+1)%mY);}
+        
+        if(flatPattern[(y+1)%mY][(x+1)%mX] != 0 && flatPattern[(y+1)%mY][(x+1)%mX] != known)
+        {mergeIt(known, flatPattern, (x+1)%mX, (y+1)%mY);}
+    }
+
+    private void vypisPole (int[][] pole)
+    {
+        for (int y = 0; y < mY; y++)
+        {
+            for (int x = 0; x < mX; x++)
+            {
+                System.out.print(pole[y][x] + " ");
+            }
+            System.out.println();
+        }
+    }
+    private void vypisPole (boolean[][] pole)
+    {
+        for (int y = 0; y < mY; y++)
+        {
+            for (int x = 0; x < mX; x++)
+            {
+                if (pole[y][x])
+                {
+                    System.out.print("1");
+                }
+                else
+                {
+                    System.out.print("1");
+                }
+            }
+            System.out.println();
+        }
+    }
     
     
 }
