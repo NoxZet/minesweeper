@@ -12,6 +12,9 @@ package minesweeper.database;
 class SingleField 
 {
     boolean[] neighbors;
+    boolean type;
+    boolean revealed;
+    boolean hasFlag;
     
     /**
      * @param type true for mine, false for empty space
@@ -20,6 +23,9 @@ class SingleField
     SingleField(boolean type, boolean[] neighbors)
     {
         this.neighbors = neighbors;
+        this.type = type;
+        this.revealed = false;
+        this.hasFlag = false;
     }
 
     /**
@@ -30,12 +36,24 @@ class SingleField
     	return neighbors[field];
     }
 
-    /**
-     * @return has valid field on right
-     */
     public boolean hasFieldRight()
     {
     	return hasField(0);
+    }
+    
+    public boolean hasFieldUp()
+    {
+    	return hasField(2);
+    }
+    
+    public boolean hasFieldLeft()
+    {
+    	return hasField(4);
+    }
+    
+    public boolean hasFieldDown()
+    {
+    	return hasField(6);
     }
     
 }

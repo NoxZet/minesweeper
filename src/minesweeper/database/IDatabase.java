@@ -16,4 +16,7 @@ public interface IDatabase
      * @param where [x,y] where 
     */
     public void clicked(int[] where);
+    public void markFlag(int[] where);
+    public int[][] getDisplay();
+    public boolean isLost();
 }
