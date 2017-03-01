@@ -1,7 +1,5 @@
 package minesweeper.main;
 
-import minesweeper.database.GenerateField;
-
 public class MineSweeper {
 
 	
