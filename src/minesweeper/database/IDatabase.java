@@ -12,11 +12,13 @@ package minesweeper.database;
 public interface IDatabase 
 {
     /**
-    * send info, where did player go
-     * @param where [x,y] where 
-    */
-    public void clicked(int[] where);
-    public void markFlag(int[] where);
-    public int[][] getDisplay();
-    public boolean isLost();
+     * This method sends data to database, where move is written 
+     * and returns boolean if you lost game by this click
+     * 
+     * @param clicked sends last clicked object
+     * @return false if game is lost
+     */
+    public boolean addMove(minesweeper.players.Click clicked);
+    public boolean isWon();
+    
 }

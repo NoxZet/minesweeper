@@ -18,14 +18,35 @@ import minesweeper.players.IPlayer;
  */
 public class MainLogic 
 {
+    IDatabase database;
+    IBoard board;
+    IPlayer player;
+    
+    MainLogic()
+    {
+        database = new DatabaseStandard();
+        board = new BoardAscii(database);
+        player = new HumanAscii();
+    }
+    
     
     boolean play()
     {
-        IDatabase database = new DatabaseStandard();
-        IBoard board = new BoardAscii(database);
-        IPlayer player = new HumanAscii();
         
-        return false;
+        boolean doMore = true;
+        while(doMore)
+        {
+            doMore = oneTurn();
+        }
+        return database.isWon();
+    }
+    
+    private boolean oneTurn()
+    {
+        minesweeper.players.Click clicked = player.playTurn();
+        boolean survived = database.addMove(clicked);
+        player.happened();
+        return survived;
     }
     
 }

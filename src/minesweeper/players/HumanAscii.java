@@ -23,14 +23,10 @@ public class HumanAscii implements IPlayer
     
     
     @Override
-    public int[] playTurn() 
+    public Click playTurn() 
     {
-        int x = sc.nextInt();
-        int y = sc.nextInt();
-        int[] pole = new int[2];
-        pole[0] = x;
-        pole[1] = y;
-        return pole;
+        
+        return null;
     }
 
     @Override

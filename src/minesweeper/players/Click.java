@@ -6,14 +6,10 @@
 package minesweeper.players;
 
 /**
- * any player interface
+ *
  * @author Honza
  */
-public interface IPlayer 
+public class Click 
 {
-    /**
-     * @return last time played position
-     */
-    public Click playTurn();
-    public void happened();
+    
 }

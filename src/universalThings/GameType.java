@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package minesweeper.players;
+package universalThings;
 
 /**
- * any player interface
+ * includes all possible types of game
  * @author Honza
  */
-public interface IPlayer 
+public enum GameType 
 {
-    /**
-     * @return last time played position
-     */
-    public Click playTurn();
-    public void happened();
+    
+    
+    
 }

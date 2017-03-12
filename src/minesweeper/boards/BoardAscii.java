@@ -42,10 +42,10 @@ public class BoardAscii implements IBoard
         
     }
 
+
     @Override
-    public void showAll(int[] param) 
-    {
-        
+    public void showLost(minesweeper.players.Click whereLost) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -14,14 +14,17 @@ public interface IBoard
     /**
     * show to player his progress
     */
+    
     public void show();
     /**
     * show to programmer whole field
     */
     public void showAll();
+    
     /**
     * show whole field after defeat
-     * @param param where did he step on bomb
+     * @param whereLost sends click that shows where was game lost
     */
-    public void showAll(int[] param);
+    public void showLost(minesweeper.players.Click whereLost);
+    
 }

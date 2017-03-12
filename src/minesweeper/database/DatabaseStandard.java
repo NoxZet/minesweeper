@@ -57,9 +57,9 @@ public class DatabaseStandard implements IDatabase
     }
     
     @Override
-    public void clicked(int[] where) 
+    public boolean addMove(minesweeper.players.Click where) 
     {
-        if (!lost)
+        /*if (!lost)
         {
             if (firstClick)
             {
@@ -71,27 +71,13 @@ public class DatabaseStandard implements IDatabase
                 if (database[where[0]][where[1]].type)
                     lost = true;
             }
-        }
-    }
-    
-    @Override
-    public void markFlag(int[] where)
-    {
-        if (!lost)
-            database[where[0]][where[1]].hasFlag ^= true;
-    }
-    
-    @Override
-    public boolean isLost()
-    {
-        return lost;
+        }*/
+        return false;
     }
 
     @Override
-    public int[][] getDisplay()
-    {
-        // TODO stub
-        return null;
+    public boolean isWon() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
