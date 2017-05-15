@@ -33,6 +33,10 @@ class GenerateField
         generatedB = generate();
     }
     
+    /**
+     * method generate total random field based on objects atributes
+     * @return field with random mines 
+     */
     private boolean[][] generate()
     {
         Random random = new Random();
@@ -64,8 +68,7 @@ class GenerateField
     /**
      * Returns unchanged random table, doesnt matter, where you clicked
      * @return random table[y][x]; 
-    */
-    
+     */
     boolean[][] getRandomTable()
     {
         return generatedB;
@@ -75,20 +78,19 @@ class GenerateField
      * This method returns field with free space on place where you clicked
      * Has some mistake, if you are clever like Svoboda, you can find where is very probably one mine
      * maybe, iam gonna fix it later by using Random
-     * @param clicked is two space field {x, y}, pointing where must be free space
+     * @param clicked is the first click
      * @return random table[y][x]
      */
     
-    boolean[][] getSpecifiedRandomTable(int[] clicked)
+    boolean[][] getSpecifiedRandomTable(minesweeper.players.Click clicked)
     {
-        if (!generatedB[clicked[1]][clicked[0]])
+        if (!generatedB[clicked.getY()][clicked.getX()])
         {
             return generatedB;
         }
         int pX = 0;
         int pY = 0;
         boolean doMore = true;
-        
         for (int y = 0; y < generatedB.length; y++)
         {
             for (int x = 0; x < generatedB[y].length; x++)
@@ -106,11 +108,8 @@ class GenerateField
                 break;
             }
         }
-        
-        pX = clicked[0] - pX;
-        pY = clicked[1] - pY;
-        
-        
+        pX = clicked.getX() - pX;
+        pY = clicked.getY() - pY;
         return moveArray(generatedB, pX, pY);
     }
     
@@ -119,8 +118,7 @@ class GenerateField
      * @param clicked {x, y} click position
      * @return random field of flags and blank spaces
      */
-    
-    public boolean[][] getRandomTableWithSpace(int[] clicked)
+    public boolean[][] getRandomTableWithSpace(minesweeper.players.Click clicked)
     {
         boolean[][] possi = new boolean[mY][mX]; //0 are 0, others are 1
         for (int y = 0; y < mY; y++)
@@ -141,9 +139,7 @@ class GenerateField
                 }
             }
         }
-        
-        
-        
+        //done, everything excepr field with value 0 is 1 now
         int[][] flatPattern = new int[mY][mX]; //types of zero flat
         int type = 1;
         for (int y = 0; y < mY; y++)
@@ -176,16 +172,23 @@ class GenerateField
             }
         }
         
+        //found largest field
+        
         
         return null;
     }
     
-    
-        
-    
+    /**
+     * moves specified array by X and Y
+     * 
+     * @param arrayToMove boolean[y][x] array, you want to move
+     * @param xMove move x
+     * @param yMove move y
+     * @return moved array
+     */
     private boolean[][] moveArray (boolean[][] arrayToMove, int xMove, int yMove)
     {
-        int limitY = arrayToMove.length;        
+        int limitY = arrayToMove.length;
         int limitX = arrayToMove[0].length;
         boolean[][] movedArray = new boolean[limitY][limitX];
         
@@ -228,6 +231,10 @@ class GenerateField
         {mergeIt(known, flatPattern, (x+1)%mX, (y+1)%mY);}
     }
 
+    /**
+     * for developers
+     * @param pole what to write
+     */
     private void vypisPole (int[][] pole)
     {
         for (int y = 0; y < mY; y++)
@@ -239,6 +246,10 @@ class GenerateField
             System.out.println();
         }
     }
+    /**
+     * for developers
+     * @param pole what to write 
+     */
     private void vypisPole (boolean[][] pole)
     {
         for (int y = 0; y < mY; y++)
